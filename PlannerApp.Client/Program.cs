@@ -18,7 +18,7 @@ namespace PlannerApp.Client
     public class Program
     {
 
-        private const string URL = "https://plannerappserver20200228091432.azurewebsites.net";
+        //private const string URL = "https://plannerappserver20200228091432.azurewebsites.net";
 
         public static async Task Main(string[] args)
         {
@@ -41,10 +41,10 @@ namespace PlannerApp.Client
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddScoped<NotificationService>();
-            builder.Services.AddScoped<AuthenticationService>(s =>
-            {
-                return new AuthenticationService(URL);
-            });
+            //builder.Services.AddScoped<AuthenticationService>(s =>
+            //{
+            //    return new AuthenticationService(URL);
+            //});
 
             builder.Services.AddApiAuthorization();
 
