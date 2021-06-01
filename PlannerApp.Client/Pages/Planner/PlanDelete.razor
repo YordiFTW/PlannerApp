@@ -1,0 +1,54 @@
+﻿@page "/Planner/PlanDelete/{Id}"
+@using PlannerApp.Shared.Models
+@inherits PlanDeleteBase
+
+<h1 class="page-title">Are you sure you want to delete the following planner?</h1>
+
+<div class="col-12 row">
+    <div class="col-2">
+
+    </div>
+    <div class="col-10 row">
+        <div class="col-xs-12 col-sm-8">
+
+            <h2></h2>
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Plan Id</label>
+                <div class="col-sm-8">
+                    <label type="text" class="form-control-plaintext">@Plan.Id</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Onderwerp</label>
+                <div class="col-sm-8">
+                    <label type="text" class="form-control-plaintext">@Plan.Title</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Details</label>
+                <div class="col-sm-8">
+                    <label type="text" class="form-control-plaintext">@Plan.Detail</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Date</label>
+                <div class="col-sm-8">
+                    <label type="text" class="form-control-plaintext">@Plan.Date</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Catagory</label>
+                <div class="col-sm-8">
+                    <label type="text" class="form-control-plaintext">@Plan.Catagory</label>
+                </div>
+            </div>
+
+
+            
+            <a class="btn btn-danger" @onclick="@DeletePlan">Ja</a>
+            <a class="btn btn-outline-primary" @onclick="@NavigateToOverView">Nee</a>
+            <p></p>
+        </div>
+    </div>
+</div>

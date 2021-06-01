@@ -1,18 +1,65 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+	  <BlazorWebAssemblyEnableLinking />
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-grid.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-grid.css.map" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-grid.min.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-grid.min.css.map" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-grid.rtl.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-grid.rtl.css.map" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-grid.rtl.min.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-grid.rtl.min.css.map" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-reboot.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-reboot.css.map" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-reboot.min.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-reboot.min.css.map" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-reboot.rtl.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-reboot.rtl.css.map" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-reboot.rtl.min.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-reboot.rtl.min.css.map" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-utilities.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-utilities.css.map" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-utilities.min.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-utilities.min.css.map" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-utilities.rtl.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-utilities.rtl.css.map" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-utilities.rtl.min.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap-utilities.rtl.min.css.map" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap.css.map" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap.min.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap.min.css.map" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap.rtl.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap.rtl.css.map" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap.rtl.min.css" />
+    <Content Remove="C:\Users\Yordi\.nuget\packages\bootstrap\5.0.1\contentFiles\any\any\wwwroot\css\bootstrap.rtl.min.css.map" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AKSoftware.WebApi" Version="3.0.1" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.1.1" />
+    <PackageReference Include="bootstrap" Version="5.0.1" />
+    <PackageReference Include="bootstrap.sass" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.5" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
     <PackageReference Include="Radzen.Blazor" Version="3.3.1" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PlannerApp.Shared\PlannerApp.Shared.csproj" />
   </ItemGroup>
 
 </Project>

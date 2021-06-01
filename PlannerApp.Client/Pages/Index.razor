@@ -1,7 +1,14 @@
 ﻿@page "/"
+@layout AuthLayout
 
-<h1>Hello, world!</h1>
+<AuthorizeView>
+    <Authorized>
+        <p />
+        <h1 style="text-align:center">Welcome @context.User.FindFirst("FirstName").Value!</h1>
+    </Authorized>
+    <NotAuthorized>
+        <p />
+        <h3 style="text-align:center">Sorry, you have to login</h3>
+    </NotAuthorized>
+</AuthorizeView>
 
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />

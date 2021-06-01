@@ -1,0 +1,49 @@
+﻿@page "/Planner/PlanAdd"
+@page "/Planner/PlanAdd/{Id}"
+@using PlannerApp.Shared.Models
+@using PlannerApp.Shared.Enums
+@inherits PlanAddBase
+
+<section class="Appointment-add">
+    @if (!Saved)
+    {
+<h1 class="page-title">Nieuwe afspraak maken</h1>
+                <EditForm Model="@Plan" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <div class="form-group">
+                        <label for="title">Titel: </label>
+                        <InputText id="title" class="form-control" @bind-Value="@Plan.Title" placeholder="Titel"></InputText>
+                        <ValidationMessage For="@(() => Plan.Title)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="details">Details: </label>
+                        <InputText id="details" class="form-control" @bind-Value="@Plan.Detail" placeholder="Details"></InputText>
+                        <ValidationMessage For="@(() => Plan.Detail)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="StartDate">Datum: </label>
+                        <InputDate id="StartDate" class="form-control" @bind-Value="@Plan.Date" placeholder="Startdatum"></InputDate>
+                        <ValidationMessage For="@(() => Plan.Date)" />
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="PlanCatagoryEnum" class="col-sm-3">Voorkeur contactvorm: </label>
+                        <InputSelect id="PlanCatagoryEnum" class="form-control col-sm-8" @bind-Value=@Plan.Catagory>
+                            <option value="@(PlanCatagoryEnum.Event1)">@PlanCatagoryEnum.Event1</option>
+                            <option value="@(PlanCatagoryEnum.Event2)">@PlanCatagoryEnum.Event2</option>
+                            <option value="@(PlanCatagoryEnum.Event3)">@PlanCatagoryEnum.Event3</option>
+                        </InputSelect>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Opslaan</button>
+                </EditForm> }
+            else
+            {
+<div class="alert @StatusClass">@Message</div>
+                <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Terug naar overzicht</a>}
+</section>

@@ -1,0 +1,54 @@
+﻿@page "/Planner/PlanIndex"
+@inherits PlanIndexBase
+
+<h1 class="page-title">All Plans</h1>
+
+<td>
+    <a href="@($"Planner/PlanAdd/")" class="btn btn-primary table-btn">
+        @*<i class="fas fa-info-circle"></i>*@
+        Activiteit aanmaken
+    </a>
+</td>
+
+
+@if (Plans == null)
+{
+<p><em>Loading...</em></p>}
+else
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>AfspraakId</th>
+            <th>Onderwerp</th>
+            <th>Datum</th>
+            <th>Catagory</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var plan in Plans)
+        {
+<tr>
+    <td>@plan.Id</td>
+    <td>@plan.Title</td>
+    <td>@plan.Date</td>
+    <td>@plan.Catagory</td>
+    <td>
+        <a href="@($"Planner/PlanDetail/{plan.Id}")" class="btn btn-primary table-btn">
+            @*<i class="fas fa-info-circle"></i>*@
+            Details
+        </a>
+        <a href="@($"Planner/PlanEdit/{plan.Id}")" class="btn btn-primary table-btn">
+            @*<i class="fas fa-edit"></i>*@
+            Aanpassen
+        </a>
+        <a href="@($"Planner/PlanDelete/{plan.Id}")" class="btn btn-danger table-btn">
+            @*<i class="fas fa-edit"></i>*@
+            Verwijderen
+        </a>
+    </td>
+</tr>
+}
+    </tbody>
+</table>}
