@@ -55,6 +55,14 @@ namespace PlannerApp.Server
                 app.UseHsts();
             }
 
+            app.UseCors(cors =>
+                           cors
+                           .AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .SetIsOriginAllowed(_ => true)
+                           .AllowCredentials()
+                        );
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -63,6 +71,7 @@ namespace PlannerApp.Server
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
+                endpoints.MapControllers();
                 endpoints.MapFallbackToPage("/_Host");
             });
         }

@@ -1,5 +1,78 @@
-﻿<h3>PlanEdit</h3>
+﻿@page "/Planner/PlanEdit"
+@page "/Planner/PlanEdit/{Id}"
+@using PlannerApp.Shared.Models
+@using PlannerApp.Shared.Enums
+@inherits PlanEditBase
 
-@code {
+<section class="Plan-edit">
+    @if (!Saved)
+    {
+        <h1 class="page-title">Details for @Plan.Title</h1>
+        <EditForm Model="@Plan" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
 
-}
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label for="title">Titel: </label>
+                <InputText id="title" class="form-control" @bind-Value="@Plan.Title" placeholder="Titel"></InputText>
+                <ValidationMessage For="@(() => Plan.Title)" />
+            </div>
+
+            <div class="form-group">
+                <label for="details">Details: </label>
+                <InputText id="details" class="form-control" @bind-Value="@Plan.Detail" placeholder="Details"></InputText>
+                <ValidationMessage For="@(() => Plan.Detail)" />
+            </div>
+
+            <div class="form-group">
+                <label for="StartDate">Datum: </label>
+                <InputDate id="StartDate" class="form-control" @bind-Value="@Plan.Date" placeholder="Startdatum"></InputDate>
+                <ValidationMessage For="@(() => Plan.Date)" />
+            </div>
+
+
+            @*<div class="form-group">
+                    <label for="DateAdded">Aanmaakdatum: </label>
+                    <InputDate id="DateAdded" class="form-control" @bind-Value="@Plan.DateAdded" placeholder="Aanmaakdatum"></InputDate>
+                    <ValidationMessage For="@(() => Plan.DateAdded)" />
+                </div>*@
+
+        <div class="form-group row">
+            <label for="Catagory" class="col-sm-3">Voorkeur contactvorm: </label>
+            <InputSelect id="Catagory" class="form-control col-sm-8" @bind-Value=@Plan.Catagory>
+                <option value="@(PlanCatagoryEnum.Event1)">@PlanCatagoryEnum.Event1</option>
+                <option value="@(PlanCatagoryEnum.Event2)">@PlanCatagoryEnum.Event2</option>
+                <option value="@(PlanCatagoryEnum.Event3)">@PlanCatagoryEnum.Event3</option>
+                
+            </InputSelect>
+        </div>
+
+            @*<div class="form-group">
+                    <label for="Bestanden">Document: </label>
+
+                    <InputFile OnChange="HandleFileSelected" />
+
+                    @if (File != null)
+                    {
+                        <p>Name: @File.Name</p>
+                        <p>Size in bytes: @File.Size</p>
+                        <p>Last modified date: @File.LastModified.ToShortDateString()</p>
+                    }
+
+                    <ValidationMessage For="@(() => Plan.Upload)" />
+                </div>*@
+
+
+            <button type="submit" class="btn btn-primary">Opslaan</button>
+
+        </EditForm>
+
+
+    }
+    else
+    {
+        <div class="alert @StatusClass">@Message</div>
+        <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>
+    }
+</section>

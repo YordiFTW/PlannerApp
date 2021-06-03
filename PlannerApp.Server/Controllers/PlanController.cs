@@ -5,104 +5,90 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PlannerApp.Server.Data;
+using PlannerApp.Server.Model;
 using PlannerApp.Shared;
 
 namespace PlannerApp.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PlanController : Controller
+    public class PlanController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IPlanRepo _planrepo;
 
-        public PlanController(ApplicationDbContext context)
+        public PlanController(IPlanRepo planRepository)
         {
-            _context = context;
+            _planrepo = planRepository;
         }
 
-        // GET: api/Plan
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Plan>>> GetPlans()
+        public IActionResult GetAllPlans()
         {
-            return await _context.Plans.ToListAsync();
+            return Ok(_planrepo.GetAllPlans());
         }
 
-        // GET: api/Plan/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Plan>> GetPlan(int id)
+        public IActionResult GetPlanById(int id)
         {
-            var plan = await _context.Plans.FindAsync(id);
-
-            if (plan == null)
-            {
-                return NotFound();
-            }
-
-            return plan;
+            return Ok(_planrepo.GetPlanById(id));
         }
 
-        // PUT: api/Plan/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPlan(int id, Plan plan)
-        {
-            if (id != plan.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(plan).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PlanExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Plan
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Plan>> PostPlan(Plan plan)
+        public IActionResult CreatePlan([FromBody] Plan plan)
         {
-            _context.Plans.Add(plan);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPlan", new { id = plan.Id }, plan);
-        }
-
-        // DELETE: api/Plan/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePlan(int id)
-        {
-            var plan = await _context.Plans.FindAsync(id);
             if (plan == null)
+                return BadRequest();
+
+            if (plan.Title == string.Empty || plan.Detail == string.Empty)
             {
-                return NotFound();
+                ModelState.AddModelError("Name/FirstName", "The name or first name shouldn't be empty");
             }
 
-            _context.Plans.Remove(plan);
-            await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            return NoContent();
+            var createdPlan = _planrepo.AddPlan(plan);
+
+            return Created("plan", createdPlan);
         }
 
-        private bool PlanExists(int id)
+        [HttpPut]
+        public IActionResult UpdatePlan([FromBody] Plan plan)
         {
-            return _context.Plans.Any(e => e.Id == id);
+            if (plan == null)
+                return BadRequest();
+
+            if (plan.Title == string.Empty || plan.Detail == string.Empty)
+            {
+                ModelState.AddModelError("Name/FirstName", "The name or first name shouldn't be empty");
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var planToUpdate = _planrepo.GetPlanById(plan.Id);
+
+            if (planToUpdate == null)
+                return NotFound();
+
+            _planrepo.UpdatePlan(plan);
+
+            return NoContent(); //success
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeletePlan(int id)
+        {
+            if (id == 0)
+                return BadRequest();
+
+            var planToDelete = _planrepo.GetPlanById(id);
+            if (planToDelete == null)
+                return NotFound();
+
+            _planrepo.DeletePlan(id);
+
+            return NoContent();//success
         }
     }
 }
-
